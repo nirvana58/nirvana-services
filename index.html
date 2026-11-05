@@ -316,6 +316,12 @@ if(burger){
  document.addEventListener('click',function(e){if(!bar.contains(e.target))closeNav()});
  addEventListener('scroll',function(){if(bar.classList.contains('open'))closeNav()},{passive:true});
 }
+var tpl=['Hi Nirvana,','','I need help with my device. Please find the details below.','','Name: ','Phone number (for a call or WhatsApp): ','Area / locality: ','','What do you need help with? (e.g. slow laptop, virus, Wi-Fi, phone setup): ','Device (brand and model): ','What is happening? (when it started, any error message): ','','Preferred help (Remote / Home visit / Either): ','Best time to contact you (Morning / Afternoon / Evening): ','How urgent (Today / In a few days / Not urgent): ','','Thank you!'].join('\n');
+var subj='Support request: [type of problem]',to='nirvanaservices09@gmail.com';
+var mailto='mailto:'+to+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(tpl).replace(/%0A/g,'%0D%0A');
+var gmail='https://mail.google.com/mail/?view=cm&fs=1&to='+to+'&su='+encodeURIComponent(subj)+'&body='+encodeURIComponent(tpl);
+var desktop=!matchMedia('(pointer:coarse)').matches&&!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){a.href=desktop?gmail:mailto;if(desktop){a.target='_blank';a.rel='noopener'}});
 })();
 </script>
 </body>
